@@ -1,11 +1,11 @@
 FROM gizra/drupal-lamp
 
-ADD . /var/www/html/esaro
-WORKDIR /var/www/html/esaro
+ADD . /var/www/html/<project_name>
+WORKDIR /var/www/html/<project_name>
 
 # Add a bash script to finalize all
-COPY docker_files/run.sh /var/www/html/esaro/docker_files/run.sh
-RUN chmod +x /var/www/html/esaro/docker_files/run.sh
-ENTRYPOINT ["/var/www/html/esaro/docker_files/run.sh"]
+COPY docker_files/run.sh /var/www/html/<project_name>/docker_files/run.sh
+RUN chmod +x /var/www/html/<project_name>/docker_files/run.sh
+ENTRYPOINT ["/var/www/html/<project_name>/docker_files/run.sh"]
 
 EXPOSE 80 3306 22

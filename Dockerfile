@@ -38,3 +38,7 @@ RUN sed -i 's/VirtualHost \*:80/VirtualHost \*:\*/' /etc/apache2/sites-available
 
 # Setup MySQL, bind on all addresses.
 RUN sed -i -e 's/^#bind-address\s*=\s*127.0.0.1/bind-address = 127.0.0.1/' /etc/mysql/my.cnf
+
+# Install Drush
+RUN wget http://files.drush.org/drush.phar
+RUN mv drush.phar /usr/local/bin/drush && chmod +x /usr/local/bin/drush
