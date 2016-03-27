@@ -1,4 +1,4 @@
-FROM nirgn975/gizra-lamp
+FROM gizra/drupal-lamp
 
 ADD . /var/www/html/esaro
 WORKDIR /var/www/html/esaro

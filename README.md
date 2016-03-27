@@ -11,6 +11,7 @@ The docker container is based on PHP 5.6-apache, and have:
 The container is configured all those stuff together.
 
 Files:
-* Example `run.sh` file.
-* Example `your-Dockerfile` file.
-* `000-default.conf` file.
+
+* `your-Dockerfile` - An example file for you `run.sh` file.
+* `run.sh` - An example for your `run.sh` file, that your `Dockerfile` is execute.
+* `000-default.conf` - A must have file in your root project, for apache configuration.
