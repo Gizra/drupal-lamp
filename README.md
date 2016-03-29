@@ -12,6 +12,6 @@ The container is configured all those stuff together.
 
 Files:
 
-* `your-Dockerfile` - An example file for you `run.sh` file.
-* `run.sh` - An example for your `run.sh` file, that your `Dockerfile` is execute.
+* `your-Dockerfile` - An example file for you `Dockerfile` file.
+* `run.sh` - An example for your `run.sh` file, that your `Dockerfile` will execute.
 * `000-default.conf` - A must have file in your root project, for apache configuration.
