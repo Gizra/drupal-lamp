@@ -19,6 +19,7 @@ RUN apt-get update -y && apt-get install -y \
     wget \
     curl \
     zip \
+		openjdk-7-jdk \
     php5-curl \
     php5-cli \
     php5-mysql
@@ -43,3 +44,9 @@ RUN sed -i -e 's/^#bind-address\s*=\s*127.0.0.1/bind-address = 127.0.0.1/' /etc/
 # Install Drush
 RUN wget http://files.drush.org/drush.phar
 RUN mv drush.phar /usr/local/bin/drush && chmod +x /usr/local/bin/drush
+
+# Install solar
+RUN cd /var/www/html \
+  && git clone https://github.com/RoySegall/solr-script.git \
+  && cd /var/www/html/solr-script \
+  && bash solr.sh -b
