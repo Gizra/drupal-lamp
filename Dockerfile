@@ -19,6 +19,7 @@ RUN apt-get update -y && apt-get install -y \
     wget \
     curl \
     zip \
+		openjdk-7-jdk \
     php5-curl \
     php5-cli \
     php5-mysql
@@ -44,17 +45,8 @@ RUN sed -i -e 's/^#bind-address\s*=\s*127.0.0.1/bind-address = 127.0.0.1/' /etc/
 RUN wget http://files.drush.org/drush.phar
 RUN mv drush.phar /usr/local/bin/drush && chmod +x /usr/local/bin/drush
 
-# Install Java
-RUN oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections \
-  && echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee /etc/apt/sources.list.d/webupd8team-java.list \
-  && echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list \
-  && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 \
-  && apt-get update \
-  && apt-get install oracle-java8-installer -y
-
 # Install solar
-RUN cd /var/www/html/circuit/ \
+RUN cd /var/www/html \
   && git clone https://github.com/RoySegall/solr-script.git \
-  && cd /var/www/html/circuit/solr-script \
-  && bash solr.sh -b \
-  && cd /var/www/html/circuit/repository
+  && cd /var/www/html/solr-script \
+  && bash solr.sh -b
