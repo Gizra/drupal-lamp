@@ -20,6 +20,8 @@ RUN apt-get update -y && apt-get install -y \
     curl \
     zip \
 		openjdk-7-jdk \
+		ruby-dev \
+		rubygems \
     php5-curl \
     php5-cli \
     php5-mysql
