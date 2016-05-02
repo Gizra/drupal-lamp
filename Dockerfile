@@ -6,24 +6,24 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN a2enmod rewrite
 
-# Drupal stuff.
-RUN apt-get update -y && apt-get install -y libpng12-dev libjpeg-dev libpq-dev \
+# Install the PHP extensions we need
+RUN apt-get update && apt-get install -y libpng12-dev libjpeg-dev libpq-dev \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
-	&& docker-php-ext-install gd mbstring zip pdo pdo_mysql pdo_pgsql zip
+	&& docker-php-ext-install gd mbstring pdo pdo_mysql pdo_pgsql zip
 
 # Installtion.
 RUN apt-get update -y && apt-get install -y \
     software-properties-common \
     git \
     wget \
-    curl \
     zip \
-		openjdk-7-jdk \
+		vim \
 		ruby-dev \
 		rubygems \
     php5-curl \
     php5-cli \
+		default-jdk \
     php5-mysql
 
 RUN apt-get install -y mysql-server \
@@ -35,20 +35,25 @@ RUN mv composer.phar /usr/local/bin/composer
 
 # Setup Apache2.
 # listen on the same port as the one we forwarded.
-RUN sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
-RUN sed -i 's/DocumentRoot \/var\/www\/html/DocumentRoot \/var\/www/' /etc/apache2/sites-available/000-default.conf
-RUN echo "Listen 8080" >> /etc/apache2/ports.conf
-RUN sed -i 's/VirtualHost \*:80/VirtualHost \*:\*/' /etc/apache2/sites-available/000-default.conf
+# RUN sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
+# RUN sed -i 's/DocumentRoot \/var\/www\/html/DocumentRoot \/var\/www/' /etc/apache2/sites-available/000-default.conf
+# RUN echo "Listen 8080" >> /etc/apache2/ports.conf
+# RUN sed -i 's/VirtualHost \*:80/VirtualHost \*:\*/' /etc/apache2/sites-available/000-default.conf
 
 # Setup MySQL, bind on all addresses.
-RUN sed -i -e 's/^#bind-address\s*=\s*127.0.0.1/bind-address = 127.0.0.1/' /etc/mysql/my.cnf
+# RUN sed -i -e 's/^#bind-address\s*=\s*127.0.0.1/bind-address = 127.0.0.1/' /etc/mysql/my.cnf
 
 # Install Drush
-RUN wget http://files.drush.org/drush.phar
-RUN mv drush.phar /usr/local/bin/drush && chmod +x /usr/local/bin/drush
+# RUN wget http://files.drush.org/drush.phar
+# RUN mv drush.phar /usr/local/bin/drush && chmod +x /usr/local/bin/drush
+RUN cd /usr/local/bin \
+		&& mkdir drush-7 \
+		&& cd drush-7 \
+		&& composer require drush/drush:7.x-dev \
+		&& ln -s /usr/local/bin/drush-7/vendor/bin/drush /usr/local/bin/drush7
 
 # Install solar
-RUN cd /var/www/html \
+RUN cd /var/www \
   && git clone https://github.com/RoySegall/solr-script.git \
-  && cd /var/www/html/solr-script \
-  && bash solr.sh -b
+  && cd solr-script \
+  && bash solr.sh -b -s https://www.dropbox.com/s/75kcni45bsenzzs/solr-4.7.2.zip
