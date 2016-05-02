@@ -31,7 +31,8 @@ RUN apt-get install -y mysql-server \
 
 # Install Composer.
 RUN curl -sS https://getcomposer.org/installer | php
-RUN mv composer.phar /usr/local/bin/composer
+RUN mv composer.phar /usr/local/bin/composer \
+		&& source ~/.bash_profile
 
 # Setup Apache2.
 # listen on the same port as the one we forwarded.
