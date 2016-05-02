@@ -44,13 +44,8 @@ RUN mv composer.phar /usr/local/bin/composer
 # RUN sed -i -e 's/^#bind-address\s*=\s*127.0.0.1/bind-address = 127.0.0.1/' /etc/mysql/my.cnf
 
 # Install Drush
-# RUN wget http://files.drush.org/drush.phar
-# RUN mv drush.phar /usr/local/bin/drush && chmod +x /usr/local/bin/drush
-RUN cd /usr/local/bin \
-		&& mkdir drush-7 \
-		&& cd drush-7 \
-		&& composer require drush/drush:7.x-dev \
-		&& ln -s /usr/local/bin/drush-7/vendor/bin/drush /usr/local/bin/drush7
+RUN export PATH="$HOME/.composer/vendor/bin:$PATH" \
+		&& composer global require drush/drush:7.*
 
 # Install solar
 RUN cd /var/www \
