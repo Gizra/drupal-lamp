@@ -6,7 +6,12 @@ The docker container is based on PHP 5.6-apache, and have:
 * MySQL
 * git
 * Composer
-* etc
+* NodeJS
+* zip
+* vim
+* Java jdk
+* ruby and rubygems
+* wget
 
 The container is configured all those stuff together.
 
