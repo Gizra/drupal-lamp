@@ -33,15 +33,9 @@ RUN apt-get install -y mysql-server \
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 
-# Setup Apache2.
-# listen on the same port as the one we forwarded.
-# RUN sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
-# RUN sed -i 's/DocumentRoot \/var\/www\/html/DocumentRoot \/var\/www/' /etc/apache2/sites-available/000-default.conf
-# RUN echo "Listen 8080" >> /etc/apache2/ports.conf
-# RUN sed -i 's/VirtualHost \*:80/VirtualHost \*:\*/' /etc/apache2/sites-available/000-default.conf
-
-# Setup MySQL, bind on all addresses.
-# RUN sed -i -e 's/^#bind-address\s*=\s*127.0.0.1/bind-address = 127.0.0.1/' /etc/mysql/my.cnf
+# Install Node.js for npm modules.
+RUN curl -sL https://deb.nodesource.com/setup_5.x | bash -
+RUN apt-get install -y nodejs
 
 # Install Drush
 RUN export PATH="$HOME/.composer/vendor/bin:$PATH" \
