@@ -1,4 +1,7 @@
 # Gizra LAMP Docker
+
+[![](https://images.microbadger.com/badges/image/gizra/drupal-lamp.svg)](https://hub.docker.com/r/gizra/drupal-lamp/)
+
 This is a base LAMP docker file.
 The docker container is based on PHP 5.6-apache, and have:
 * Drupal
