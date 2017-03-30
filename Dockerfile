@@ -23,8 +23,7 @@ RUN apt-get update -y && apt-get install -y \
 		rubygems \
     php5-curl \
     php5-cli \
-    php5-xcache \
-    default-jdk \
+		default-jdk \
     php5-mysql
 
 RUN apt-get install -y mysql-server \
