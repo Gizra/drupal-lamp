@@ -1,5 +1,5 @@
-FROM php:5.6-apache
-MAINTAINER Nir Galon <nir.galon@gizra.com>
+FROM php:7.1-apache
+MAINTAINER Aron Novak <aron@gizra.com>
 
 # Setup environment.
 ENV DEBIAN_FRONTEND noninteractive
@@ -41,7 +41,7 @@ RUN apt-get install -y nodejs
 RUN export PATH="$HOME/.composer/vendor/bin:$PATH" \
 		&& composer global require drush/drush:7.*
 
-# Install solar
+# Install Solr
 RUN cd /var/www \
   && git clone https://github.com/RoySegall/solr-script.git \
   && cd solr-script \
