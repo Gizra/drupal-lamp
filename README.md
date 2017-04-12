@@ -3,7 +3,7 @@
 [![](https://images.microbadger.com/badges/image/gizra/drupal-lamp.svg)](https://hub.docker.com/r/gizra/drupal-lamp/)
 
 This is a base LAMP docker file.
-The docker container is based on PHP 5.6-apache, and have:
+The docker container is based on PHP 7.1-apache, and have:
 * Drupal
 * Apache2
 * MySQL
@@ -15,6 +15,7 @@ The docker container is based on PHP 5.6-apache, and have:
 * Java jdk
 * ruby and rubygems
 * wget
+* Solr
 
 The container is configured all those stuff together.
 
