@@ -1,4 +1,4 @@
-FROM php:7.1-apache
+FROM php:7.1.5-apache
 MAINTAINER Aron Novak <aron@gizra.com>
 
 # Setup environment.
