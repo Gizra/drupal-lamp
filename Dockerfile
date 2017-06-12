@@ -50,10 +50,13 @@ RUN npm install -g bower
 RUN npm install -g gulp
 
 # Elm-Test
-RUN npm install -g elm-test
+RUN npm install -g elm-test@0.18.2
 
 # sysconfcpus
-
+RUN git clone https://github.com/obmarg/libsysconfcpus.git &&
+  cd libsysconfcpus &&
+  ./configure --prefix=/usr &&
+  make -j8 && make install
 
 # WDIO
 RUN npm install -g webdriverio@4.6.2 wdio-mocha-framework@0.5.8 wdio-selenium-standalone-service@0.0.7  wdio-spec-reporter@0.0.5
