@@ -53,9 +53,9 @@ RUN npm install -g gulp
 RUN npm install -g elm-test@0.18.2
 
 # sysconfcpus
-RUN git clone https://github.com/obmarg/libsysconfcpus.git &&
-  cd libsysconfcpus &&
-  ./configure --prefix=/usr &&
+RUN git clone https://github.com/obmarg/libsysconfcpus.git && \
+  cd libsysconfcpus && \
+  ./configure --prefix=/usr && \
   make -j8 && make install
 
 # WDIO
