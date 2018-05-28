@@ -19,6 +19,7 @@ RUN mkdir -p /usr/share/man/man1 && mkdir -p /usr/share/man/man2 && mkdir -p /us
 RUN apt-get update -y && apt-get install -y \
     software-properties-common \
     git \
+    gnupg \
     wget \
     zip \
 		vim \
@@ -34,7 +35,7 @@ RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 
 # Install Node.js for npm modules.
-RUN curl -sL https://deb.nodesource.com/setup_5.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN apt-get install -y nodejs
 
 # Install Drush
