@@ -7,10 +7,13 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN a2enmod rewrite
 
 # Install the PHP extensions we need
-RUN apt-get update && apt-get install -y libpng12-dev libjpeg-dev libpq-dev \
+RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev libpq-dev \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
-	&& docker-php-ext-install gd mbstring pdo pdo_mysql pdo_pgsql zip
+  && docker-php-ext-install gd mbstring pdo pdo_mysql pdo_pgsql zip
+
+# https://github.com/resin-io-library/base-images/issues/273#issuecomment-299096667
+RUN mkdir -p /usr/share/man/man1 && mkdir -p /usr/share/man/man2 && mkdir -p /usr/share/man/man3 && mkdir -p /usr/share/man/man4 && mkdir -p /usr/share/man/man5 && mkdir -p /usr/share/man/man6 && mkdir -p /usr/share/man/man7
 
 # Installation.
 RUN apt-get update -y && apt-get install -y \
@@ -20,11 +23,8 @@ RUN apt-get update -y && apt-get install -y \
     zip \
 		vim \
 		ruby-dev \
-		rubygems \
-    php5-curl \
-    php5-cli \
-		default-jdk \
-    php5-mysql
+    rubygems \
+    openjdk-8-jre
 
 RUN apt-get install -y mysql-server \
     mysql-client
@@ -49,3 +49,6 @@ RUN cd /var/www \
 
 # MySQL fine-tuning
 ADD mysql-perf.conf /etc/mysql/conf.d/mysql-perf.conf
+
+## PHP memory limit
+RUN echo "memory_limit = 256M" >> /usr/local/etc/php/php.ini
